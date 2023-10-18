@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class signUp {
+public class signUp {
     public Scanner scanner = new Scanner(System.in);
     String name;
     double number;
