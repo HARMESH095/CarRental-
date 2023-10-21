@@ -29,6 +29,7 @@ passwordCheck();        }
         System.out.println("reEnter Password");
         recheck = scanner.nextLine();
         if(!(password.equals(recheck))){
+            System.out.println("Password Not Matching\nEnter Again\n");
             passwordCheck();
         }
         else{

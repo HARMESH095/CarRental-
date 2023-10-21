@@ -6,6 +6,7 @@ public class Main {
         System.out.println(" 1. Signup If you are new to this website");
         System.out.println(" 2. Login");
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your choice : ");
         int choice = scanner.nextInt();
         if (choice == 1) {
             sign.register();
@@ -17,7 +18,6 @@ public class Main {
         }
 
 
-        
 
 
     }

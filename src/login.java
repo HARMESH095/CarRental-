@@ -5,6 +5,7 @@ public class login {
     static String number1;
     static String password1;
 
+
     public static void log(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Username : ");
