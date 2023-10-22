@@ -23,7 +23,7 @@ public class loginEntity {
     public String getGmail() {
         return gmail;
     }
-    public void setPassword(String Password){
+    public void setPassword(String password){
         this.password = password;
     }
     public String getPassword(){

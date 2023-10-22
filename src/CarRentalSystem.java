@@ -17,7 +17,6 @@ public class CarRentalSystem {
         switch (choice) {
             case 1:
                 sign.register();
-
                 break;
             case 2:
                 login.log();
