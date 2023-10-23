@@ -1,12 +1,12 @@
-package accessProcess;
-import accessEntities.*;
+package CustomerAccessProcess;
+import CustomerAccessEntities.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Scanner;
 import Database.*;
-public class signUp {
+public class signUpProcess {
     mySqlEntity entries = new mySqlEntity();
     Scanner input = new Scanner(System.in);
     signUpEntity signUp = new signUpEntity();

@@ -13,7 +13,7 @@ public class carEntity {
     private int availability;
     private int price;
 
-    public void getCarDetails(int carId, String model, String make, int yearOfMake, String color,String plateNumber,int seats, String fuelType, int mileage,int availability, int price) {
+    public void setCarDetails(int carId, String model, String make, int yearOfMake, String color,String plateNumber,int seats, String fuelType, int mileage,int availability, int price) {
         this.carId=carId;
         this.model=model;
         this.make=make;
@@ -25,6 +25,19 @@ public class carEntity {
         this.mileage=mileage;
         this.availability=availability;
         this.price=price;
+    }
+    public String toString() {
+        return "Car ID: " + carId +
+                ", Model: " + model +
+                ", Make: " + make +
+                ", Year of Make: " + yearOfMake +
+                ", Color: " + color +
+                ", Plate Number: " + plateNumber +
+                ", Seats: " + seats +
+                ", Fuel Type: " + fuelType +
+                ", Mileage: " + mileage +
+                ", Availability: " + availability +
+                ", Price: " + price;
     }
 
 

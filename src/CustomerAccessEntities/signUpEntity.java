@@ -1,4 +1,4 @@
-package accessEntities;
+package CustomerAccessEntities;
 
 public class signUpEntity {
 

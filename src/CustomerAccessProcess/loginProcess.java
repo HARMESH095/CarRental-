@@ -1,6 +1,6 @@
-package accessProcess;
+package CustomerAccessProcess;
 
-import accessEntities.loginEntity;
+import CustomerAccessEntities.userLoginEntity;
 import Database.mySqlEntity;
 
 import java.sql.*;
@@ -10,14 +10,15 @@ import java.util.Scanner;
 public class loginProcess {
     private final HashMap<String, String> UserPasswordMap = new HashMap<>();
     private final mySqlEntity mysql = new mySqlEntity();
-    private final loginEntity login = new loginEntity();
+    private final userLoginEntity login = new userLoginEntity();
     private final Scanner input = new Scanner(System.in);
 
-    public void log() {
+    public String logIn() {
         System.out.println("Username : ");
         login.setUsername(input.nextLine());
         System.out.println("Passcode : ");
         login.setPassword(input.nextLine());
+        String usernamefinal = null;
 
 
         try {
@@ -48,22 +49,20 @@ public class loginProcess {
         if (UserPasswordMap.containsKey(login.getUsername())) {
             if (login.getPassword().equals(UserPasswordMap.get(login.getUsername()))) {
                 System.out.println("Successfully logged in");
+                usernamefinal = login.getUsername();
             } else {
                 System.out.println("Password mismatch");
+                logIn();
             }
         } else {
             System.out.println("Username not found");
+            logIn();
         }
+        return usernamefinal;
     }
 
 
-    //private final String enteredPassword = login.getPassword();
-    //private final String enteredUsername = login.getUsername();
 
-    //public void databaseToMap() {
 
-   // }
-
-    //public void userPassCheck() {
 
 }

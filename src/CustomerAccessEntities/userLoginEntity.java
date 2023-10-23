@@ -1,6 +1,6 @@
-package accessEntities;
+package CustomerAccessEntities;
 
-public class loginEntity {
+public class userLoginEntity {
     private Double number;
     private String username;
     private String gmail;
