@@ -9,7 +9,7 @@ import Backend.UploadCars;
 public class CarRentalSystem {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        signUpProcess signup = new signUpProcess();
+        SignUpProcess signup = new SignUpProcess();
         loginProcess login = new loginProcess();
         EmployeeLoginProcess employeeLoginProcess = new EmployeeLoginProcess();
         DisplayCarDetails displayCarDetails = new DisplayCarDetails();
@@ -29,11 +29,13 @@ public class CarRentalSystem {
             System.out.println(" 1. SIGNUP (If you are new to this system) ");
             System.out.println(" 2. LOGIN (Already a USER)");
             System.out.println(" ENTER YOUR CHOICE (1 or 2)");
+
             int accessChoice = input.nextInt();
 
             switch(accessChoice){
                 case 1:
                     signup.register();
+                    name = login.logIn();
                     break;
                 case 2:
                     name = login.logIn();
@@ -42,7 +44,7 @@ public class CarRentalSystem {
                 default:
                     System.out.println("Entered Wrong Value");
             }
-            while(true) {
+            while( name!= null) {
                 System.out.println(" 1. Reserve Car\n 2. Display Car Details\n 3. Change Reservation / Details\n 4. Logout");
 
                 int option = input.nextInt();
@@ -96,6 +98,7 @@ public class CarRentalSystem {
 
                 } else if (option == 4) {
                     System.out.println("Logged out");
+                    name = null;
                     break;
                 } else {
                     System.out.println("wrong value");

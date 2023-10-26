@@ -1,6 +1,6 @@
 package CustomerAccessEntities;
 
-public class signUpEntity {
+public class SignUpEntity {
 
     private String name;
     private double number;
@@ -10,7 +10,7 @@ public class signUpEntity {
     public void setName(String name){
         this.name = name;
     }
-    public String getname(){
+    public String getName(){
         return name;
     }
     public void setNumber(double number){

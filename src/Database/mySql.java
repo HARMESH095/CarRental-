@@ -1,13 +1,13 @@
 package Database;
 
-import CustomerAccessEntities.signUpEntity;
+import CustomerAccessEntities.SignUpEntity;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class mySql {
-    signUpEntity signUp = new signUpEntity();
+    SignUpEntity signUp = new SignUpEntity();
 
 
     public void getConnection(){
@@ -17,7 +17,7 @@ public class mySql {
             String Password = "Harmesh26@";
 
             Connection connection = DriverManager.getConnection(JdbcURL, Username, Password);
-            String name = signUp.getname();
+            String name = signUp.getName();
             String email = signUp.getGmail();
             double phone = signUp.getNumber();
             String password = signUp.getPassword();

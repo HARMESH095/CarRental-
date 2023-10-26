@@ -1,21 +1,28 @@
 package Backend;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import Database.mySqlEntity;
 import car.carEntity; // Import your CarEntity class
+import DatabaseConnection.MysqlConnectionCarDetails;
 
 public class UploadCars {
     Scanner input = new Scanner(System.in);
     carEntity car = new carEntity();
-    mySqlEntity mysql = new mySqlEntity();
+    Connection connection = null; // Declare a connection object
 
     public void entry() {
         String inputLine;
+
+        try {
+            MysqlConnectionCarDetails mysqlConnectionCarDetails = new MysqlConnectionCarDetails();
+            connection = mysqlConnectionCarDetails.getConnection(); // Get the database connection
+        } catch (Exception e) {
+            System.out.println("Database connection error: " + e);
+            return; // Exit the method if there's a connection error
+        }
 
         while (true) {
             System.out.println("Enter car details or type 'exit' to finish.");
@@ -57,22 +64,14 @@ public class UploadCars {
             } catch (Exception e) {
                 System.out.println("Value error: " + e);
             }
-
         }
     }
 
-
     public void databaseImport() {
         try {
-            mysql.setDatabaseJdbcURL("jdbc:mysql://localhost:3306/car");
-            mysql.setdatabaseUsername("root");
-            mysql.setDatabasePassword("Harmesh26@");
-
-            Connection connection = DriverManager.getConnection(mysql.getDatabaseJdbcURL(), mysql.getDatabaseUsername(), mysql.getDatabasePassword());
-
             // Create an SQL INSERT statement
             String sql = "INSERT INTO cardetails (carId, model, make, yearOfMake, color, plateNumber, seats, fuelType, mileage, availability, price) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             // Create a PreparedStatement to execute the SQL statement
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -91,9 +90,6 @@ public class UploadCars {
             // Execute the INSERT statement
             statement.executeUpdate();
             System.out.println("Successfully updated");
-
-            // Close the connection
-            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -1,6 +1,6 @@
 package CustomerAccessProcess;
 
-import CustomerAccessEntities.userLoginEntity;
+import CustomerAccessEntities.UserLoginEntity;
 import Database.mySqlEntity;
 
 import java.sql.*;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class loginProcess {
     private final HashMap<String, String> UserPasswordMap = new HashMap<>();
     private final mySqlEntity mysql = new mySqlEntity();
-    private final userLoginEntity login = new userLoginEntity();
+    private final UserLoginEntity login = new UserLoginEntity();
     private final Scanner input = new Scanner(System.in);
 
     public String logIn() {
