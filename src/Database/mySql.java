@@ -12,6 +12,7 @@ public class mySql {
 
     public void getConnection(){
         try {
+
             String JdbcURL ="jdbc:mysql://localhost:3306/customerDetails";
             String Username ="root";
             String Password = "Harmesh26@";

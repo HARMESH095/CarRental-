@@ -14,7 +14,7 @@ public class UploadCars {
     Connection connection = null; // Declare a connection object
 
     public void entry() {
-        String inputLine;
+
 
         try {
             MysqlConnectionCarDetails mysqlConnectionCarDetails = new MysqlConnectionCarDetails();

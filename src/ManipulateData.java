@@ -3,7 +3,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
-import Database.mySqlEntity;
 import java.util.Scanner;
 
 

@@ -7,32 +7,29 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
-import Database.mySqlEntity;
-import car.CarReserveRegisterEntity;
+import DatabaseConnection.MysqlConnectionCarDetails;
 
 
 public class CarSelection {
-    mySqlEntity mySql = new mySqlEntity();
     ArrayList<Integer> SelectedCars = new ArrayList<>();
     Map<Integer, List<carEntity>> carMap = new HashMap<>(); // Use carEntity in the map
     CarReserveRegisterEntity carReserveRegisterEntity = new CarReserveRegisterEntity();
     Scanner input = new Scanner(System.in);
     private final HashMap<String, String> UserPasswordMap = new HashMap<>();
 
-    public void databaseIntoMap()    {
+    public void databaseIntoMap(){
+        MysqlConnectionCarDetails mysqlConnectionCarDetails = new MysqlConnectionCarDetails();
 
 
         try {
-            mySql.setDatabaseJdbcURL("jdbc:mysql://localhost:3306/car");
-            mySql.setdatabaseUsername("root");
-            mySql.setDatabasePassword("Harmesh26@");
+            Connection connection = mysqlConnectionCarDetails.getConnection();
 
-            Connection connection = DriverManager.getConnection(mySql.getDatabaseJdbcURL(),mySql.getDatabaseUsername(),mySql.getDatabasePassword());
+
 
             try {
-                mySql.setInputSql("SELECT * FROM cardetails");
+                String sql ="SELECT * FROM cardetails";
 
-                PreparedStatement preparedStatement = connection.prepareStatement(mySql.getInputSql());
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 while (resultSet.next()) {
