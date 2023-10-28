@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 import DatabaseConnection.MysqlConnectionCarDetails;
+import DatabaseConnection.MysqlConnectionUserDetails;
+import DatabaseConnection.MysqlConnectionCarReservationDetails;
 
 
 public class CarSelection {
@@ -142,14 +144,13 @@ public class CarSelection {
             System.out.println("PASSWORD : ");
             carReserveRegisterEntity.setPassword(input.nextLine());
 
-            try{
-                mySql.setDatabaseJdbcURL("jdbc:mysql://localhost:3306/customerDetails");
-                mySql.setdatabaseUsername("root");
-                mySql.setDatabasePassword("Harmesh26@");
-                try (Connection connection = DriverManager.getConnection(mySql.getDatabaseJdbcURL(), mySql.getDatabaseUsername(), mySql.getDatabasePassword())) {
-                    mySql.setInputSql("SELECT user_name, user_password FROM userdetails");
+
+                try{
+                    MysqlConnectionUserDetails mysqlConnectionUserDetails = new MysqlConnectionUserDetails();
+                    String sql = "SELECT user_name, user_password FROM userdetails";
+                    Connection connection = mysqlConnectionUserDetails.getConnection();
                     try (Statement statement = connection.createStatement();
-                         ResultSet resultSet = statement.executeQuery(mySql.getInputSql())) {
+                         ResultSet resultSet = statement.executeQuery(sql)) {
                         while (resultSet.next()) {
                             String username = resultSet.getString("user_name");
                             String password = resultSet.getString("user_password");
@@ -173,52 +174,54 @@ public class CarSelection {
                 }
 
 
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-            String reservedCarString = reservedCar.toString();
-            mySql.setDatabaseJdbcURL("jdbc:mysql://localhost:3306/Reservation");
-            mySql.setdatabaseUsername("root");
-            mySql.setDatabasePassword("Harmesh26@");
-            Connection connection = DriverManager.getConnection(mySql.getDatabaseJdbcURL(), mySql.getDatabaseUsername(), mySql.getDatabasePassword());
-
-            mySql.setInputSql("INSERT INTO car_reservations (name, date_of_birth, gender, license_number, residential_address, number, emergency_number, from_date, days, address, reservedCar,registered_username, registered_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)");
-
-            PreparedStatement preparedStatement = connection.prepareStatement(mySql.getInputSql());
-            preparedStatement.setString(1, carReserveRegisterEntity.getName());
-            preparedStatement.setString(2, carReserveRegisterEntity.getDateOfBirth());
-            preparedStatement.setString(3, String.valueOf(carReserveRegisterEntity.getGender()));
-            preparedStatement.setDouble(4, carReserveRegisterEntity.getLicenseNumber());
-            preparedStatement.setString(5, carReserveRegisterEntity.getResidentialAddress());
-            preparedStatement.setDouble(6, carReserveRegisterEntity.getNumber());
-            preparedStatement.setDouble(7, carReserveRegisterEntity.getEmergencyNumber());
-            preparedStatement.setString(8, carReserveRegisterEntity.getFromDate());
-            preparedStatement.setInt(9, carReserveRegisterEntity.getDays());
-            preparedStatement.setString(10, carReserveRegisterEntity.getAddress());
-            preparedStatement.setString(11, reservedCarString);
-            preparedStatement.setString(12,carReserveRegisterEntity.getUsername());
-            preparedStatement.setString(13,carReserveRegisterEntity.getPassword());
-
-            int rowsInserted = preparedStatement.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("Car reservation successful for " + carReserveRegisterEntity.getName());
-            } else {
-                System.out.println("Car reservation failed.");
-            }
-
-            preparedStatement.close();
-            connection.close();
-        } catch (Exception e) {
-            System.out.println("Error connecting with the database: " + e);
+            } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
 
+        String reservedCarString = reservedCar.toString();
         try {
-            mySql.setDatabaseJdbcURL("jdbc:mysql://localhost:3306/car");
-            mySql.setdatabaseUsername("root");
-            mySql.setDatabasePassword("Harmesh26@");
-            Connection connection = DriverManager.getConnection(mySql.getDatabaseJdbcURL(), mySql.getDatabaseUsername(), mySql.getDatabasePassword());
+            MysqlConnectionCarReservationDetails mysqlConnectionCarReservationDetails = new MysqlConnectionCarReservationDetails();
+            Connection connection = mysqlConnectionCarReservationDetails.getConnection();
+            try {
+                String sql = "INSERT INTO car_reservations (name, date_of_birth, gender, license_number, residential_address, number, emergency_number, from_date, days, address, reservedCar,registered_username, registered_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, carReserveRegisterEntity.getName());
+                preparedStatement.setString(2, carReserveRegisterEntity.getDateOfBirth());
+                preparedStatement.setString(3, String.valueOf(carReserveRegisterEntity.getGender()));
+                preparedStatement.setDouble(4, carReserveRegisterEntity.getLicenseNumber());
+                preparedStatement.setString(5, carReserveRegisterEntity.getResidentialAddress());
+                preparedStatement.setDouble(6, carReserveRegisterEntity.getNumber());
+                preparedStatement.setDouble(7, carReserveRegisterEntity.getEmergencyNumber());
+                preparedStatement.setString(8, carReserveRegisterEntity.getFromDate());
+                preparedStatement.setInt(9, carReserveRegisterEntity.getDays());
+                preparedStatement.setString(10, carReserveRegisterEntity.getAddress());
+                preparedStatement.setString(11, reservedCarString);
+                preparedStatement.setString(12,carReserveRegisterEntity.getUsername());
+                preparedStatement.setString(13,carReserveRegisterEntity.getPassword());
+
+                int rowsInserted = preparedStatement.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("Car reservation successful for " + carReserveRegisterEntity.getName());
+                } else {
+                    System.out.println("Car reservation failed.");
+                }
+
+                preparedStatement.close();
+                connection.close();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+
+
+
+
+        try {
+            MysqlConnectionCarDetails mysqlConnectionCarDetails = new MysqlConnectionCarDetails();
+            Connection connection = mysqlConnectionCarDetails.getConnection();
             // Check if the selected cars are available
             boolean allCarsAvailable = true;
             int totalAmount = 0;

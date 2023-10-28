@@ -17,16 +17,28 @@ public class SignUpProcess {
 
         System.out.println("---------- SIGNUP ----------");
         System.out.print("NAME: ");
-        signUp.setName(input.nextLine());
+        try{
+            signUp.setName(input.nextLine());
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
 
         System.out.print("GMAIL: ");
-        signUp.setGmail(input.nextLine());
+        try{
+            signUp.setGmail(input.nextLine());
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
 
         System.out.print("PHONE NUMBER: ");
-        signUp.setNumber(input.nextDouble());
+        try {
+            signUp.setNumber(input.nextDouble());
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
         input.nextLine();
 
-        int attempts = 3; // Set the number of password input attempts
+        int attempts = 3;
         while (attempts > 0) {
             System.out.print("Enter password: ");
             String password = input.nextLine();
@@ -38,6 +50,8 @@ public class SignUpProcess {
                 System.out.println("Password Not Matching. You have " + (attempts - 1) + " attempts remaining.");
                 attempts--;
             } else {
+
+
                 // Passwords match, continue with registration
                 try (Connection connection = mySqlConnection.getConnection()) {
                     String sql = "INSERT INTO userdetails(user_name, user_email, user_phone, user_password) VALUES (?, ?, ?, ?)";
@@ -48,11 +62,11 @@ public class SignUpProcess {
                         preparedStatement.setString(4, signUp.getPassword());
                         preparedStatement.executeUpdate();
                     }
-                    System.out.println("Successfully saved into the database");
+                    System.out.println(signUp.getName()+" this is your username");
                 } catch (SQLException e) {
                     System.err.println("An error occurred during registration: " + e.getMessage());
                 }
-                break; // Registration is successful, exit the loop
+                break;
             }
         }
         if (attempts == 0) {

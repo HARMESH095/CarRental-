@@ -42,15 +42,40 @@ public class carEntity {
 
 
     public void setCarId(int carId) {
-        this.carId = carId;
+        if(carId > 0){
+            this.carId = carId;
+        }
+        else{
+            throw new IllegalArgumentException("Car Id should not be negative");
+        }
+
     }
 
     public int getCarId() {
         return carId;
     }
+    public void setModel(String model) {
+        if(model != null && model.matches("^[a-zA-Z]+$")){
+            this.model = model.toLowerCase();
+        }
+        else{
+            throw new IllegalArgumentException("should not be null");
+        }
+    }
+
+    public String getModel() {
+        return model;
+    }
+
 
     public void setMake(String make) {
-        this.make = make;
+        if(make != null){
+            this.make = make.toLowerCase();
+        }
+        else{
+            throw new IllegalArgumentException("Should not be Null");
+        }
+
     }
 
     public String getMake() {
@@ -58,7 +83,12 @@ public class carEntity {
     }
 
     public void setYearOfMake(int yearOfMake) {
-        this.yearOfMake = yearOfMake;
+        if(yearOfMake > 0){
+            this.yearOfMake = yearOfMake;
+        }
+        else{
+            throw new IllegalArgumentException("should not be negative");
+        }
     }
 
     public int getYearOfMake() {
@@ -66,7 +96,12 @@ public class carEntity {
     }
 
     public void setColor(String color) {
-        this.color = color;
+        if(color != null && color.matches("^[a-zA-Z]+$")){
+            this.color = color.toLowerCase();
+        }
+        else{
+            throw new IllegalArgumentException("should not be null");
+        }
     }
 
     public String getColor() {
@@ -74,7 +109,12 @@ public class carEntity {
     }
 
     public void setPlateNumber(String plateNumber) {
-        this.plateNumber = plateNumber;
+        if(plateNumber != null && plateNumber.matches("^[A-Z]{2}\\d{1,2}[A-Z]{1,2}\\d{4}$")){
+            this.plateNumber = plateNumber;
+        }
+        else{
+            throw new IllegalArgumentException("should follow this case \"TN14AN7248");
+        }
     }
 
     public String getPlateNumber() {
@@ -82,7 +122,12 @@ public class carEntity {
     }
 
     public void setSeats(int seats) {
-        this.seats = seats;
+        if(seats > 0){
+            this.seats=seats;
+        }
+        else{
+            throw new IllegalArgumentException("should not be negative");
+        }
     }
 
     public int getSeats() {
@@ -90,28 +135,30 @@ public class carEntity {
     }
 
     public void setFuelType(String fuelType) {
-        this.fuelType = fuelType;
+        if (fuelType != null && fuelType.matches("(?i)^(petrol|gasoline|electric|diesel|natural gas|lpg)$")) {
+            this.fuelType = fuelType.toLowerCase();
+        } else {
+            throw new IllegalArgumentException("Fuel type should not be null or is of the wrong type");
+        }
     }
-
     public String getFuelType() {
+        if (fuelType != null && !fuelType.isEmpty()) {
+            return Character.toUpperCase(fuelType.charAt(0)) + fuelType.substring(1);
+        }
         return fuelType;
     }
 
     public void setMileage(int mileage) {
-        this.mileage = mileage;
+        if(mileage > 0){
+            this.mileage = mileage;
+        }
+        else{
+            throw new IllegalArgumentException("Mileage should be a positive value.");
+        }
     }
 
     public int getMileage() {
         return mileage;
-    }
-
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getModel() {
-        return model;
     }
 
     public void setAvailability(int availability) {
@@ -123,9 +170,13 @@ public class carEntity {
     }
 
     public void setPrice(int price) {
-        this.price = price;
+        if(price > 0){
+            this.price = price;
+        }
+        else {
+            throw new IllegalArgumentException("Price should not be empty");
+        }
     }
-
     public int getPrice() {
         return price;
     }

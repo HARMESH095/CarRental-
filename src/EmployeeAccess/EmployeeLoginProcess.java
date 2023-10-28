@@ -23,11 +23,6 @@ public class EmployeeLoginProcess {
         System.out.println("Passcode : ");
         loginEntity.setPassword(input.nextLine());
 
-
-
-
-
-
             try {
                 MysqlConnectionEmployeeCredentials mysqlConnectionEmployeeCredentials = new MysqlConnectionEmployeeCredentials();
                 connection = mysqlConnectionEmployeeCredentials.getConnection();

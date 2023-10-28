@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MysqlConnectionUserDetails {
-    private static final String JdbcURl = "jdbc:mysql://localhost:3306/userDetails";
+    private static final String JdbcURl = "jdbc:mysql://localhost:3306/customerDetails";
     private static final String Username = "root";
     private static final String Password = "Harmesh26@";
 
