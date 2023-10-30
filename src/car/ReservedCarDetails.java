@@ -1,9 +1,11 @@
+package car;
+
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
 import DatabaseConnection.MysqlConnectionCarReservationDetails;
-import CustomerAccessEntities.UserLoginEntity;
+import Entity.UserLoginEntity;
 public class ReservedCarDetails {
     private final HashMap<String, String> UserPasswordMap = new HashMap<>();
     Scanner input = new Scanner(System.in);

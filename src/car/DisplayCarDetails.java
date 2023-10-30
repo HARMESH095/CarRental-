@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import car.carEntity;
+import Entity.carEntity;
 
 public class DisplayCarDetails {
     public void display() {

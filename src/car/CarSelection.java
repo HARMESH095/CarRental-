@@ -10,6 +10,8 @@ import java.util.Scanner;
 import DatabaseConnection.MysqlConnectionCarDetails;
 import DatabaseConnection.MysqlConnectionUserDetails;
 import DatabaseConnection.MysqlConnectionCarReservationDetails;
+import Entity.CarReserveRegisterEntity;
+import Entity.carEntity;
 
 
 public class CarSelection {

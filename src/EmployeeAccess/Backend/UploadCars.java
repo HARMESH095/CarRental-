@@ -1,11 +1,11 @@
-package Backend;
+package EmployeeAccess.Backend;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import car.carEntity; // Import your CarEntity class
+import Entity.carEntity; // Import your CarEntity class
 import DatabaseConnection.MysqlConnectionCarDetails;
 
 public class UploadCars {

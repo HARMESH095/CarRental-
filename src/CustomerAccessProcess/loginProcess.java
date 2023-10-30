@@ -1,6 +1,6 @@
 package CustomerAccessProcess;
 
-import CustomerAccessEntities.UserLoginEntity;
+import Entity.UserLoginEntity;
 
 import java.sql.*;
 import java.util.HashMap;

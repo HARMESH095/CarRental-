@@ -1,4 +1,4 @@
-package CustomerAccessEntities;
+package Entity;
 
 public class UserLoginEntity {
     private Double number;

@@ -1,6 +1,6 @@
 package CustomerAccessProcess;
 
-import CustomerAccessEntities.SignUpEntity;
+import Entity.SignUpEntity;
 import DatabaseConnection.MysqlConnectionUserDetails;
 
 import java.sql.Connection;

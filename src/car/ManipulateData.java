@@ -1,11 +1,13 @@
+package car;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
 import java.util.Scanner;
 
 import DatabaseConnection.MysqlConnectionCarReservationDetails;
+import car.ReservedCarDetails;
 
 public class ManipulateData {
        Scanner input = new Scanner(System.in);

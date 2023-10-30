@@ -1,4 +1,4 @@
-package car;
+package Entity;
 
 public class carEntity {
     private int carId;
