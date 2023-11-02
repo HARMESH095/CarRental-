@@ -6,8 +6,8 @@ public class CarReserveRegisterEntity {
     private Character gender;
     private Double licenseNumber;
     private String residentialAddress;
-    private Double number;
-    private Double emergencyNumber;
+    private String number;
+    private String emergencyNumber;
     private String fromDate;
     private int days;
     private String address;
@@ -15,7 +15,7 @@ public class CarReserveRegisterEntity {
     private String password;
 
     public void setCarReserveRegister(String name, String dateOfBirth, Character gender, Double licenseNumber,
-                                      String residentialAddress, Double number, Double emergencyNumber, String fromDate, int days, String address) {
+                                      String residentialAddress, String number, String emergencyNumber, String fromDate, int days, String address) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
@@ -29,8 +29,11 @@ public class CarReserveRegisterEntity {
     }
 
     public void setName(String name) {
-        if (name != null) {
-            this.name = name;
+        if (name != null && name.matches("^[a-zA-Z ]+$")) {
+            this.name = name.toLowerCase();
+        }
+        else{
+            throw new IllegalArgumentException("should not enter any symbols");
         }
     }
 
@@ -39,8 +42,11 @@ public class CarReserveRegisterEntity {
     }
 
     public void setDateOfBirth(String dateOfBirth) {
-        if (dateOfBirth != null) {
+        if (dateOfBirth != null && dateOfBirth.matches("^\\d{4}-\\d{2}-\\d{2}")) {
             this.dateOfBirth = dateOfBirth;
+        }
+        else{
+            throw new IllegalArgumentException("Should be in this format YYYY-MM-DD");
         }
     }
 
@@ -49,7 +55,9 @@ public class CarReserveRegisterEntity {
     }
 
     public void setGender(char gender) {
-        this.gender = gender;
+
+            this.gender = gender;
+
     }
 
     public Character getGender() {
@@ -66,25 +74,38 @@ public class CarReserveRegisterEntity {
         return residentialAddress;
     }
 
-    public void setNumber(Double number) {
-        this.number = number;
+    public void setNumber(String number) {
+        if(number != null && number.matches("^\\d{10,12}")){
+            this.number = number;
+        }
+        else{
+            throw new IllegalArgumentException("only digits");
+        }
     }
 
-    public Double getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setEmergencyNumber(Double emergencyNumber) {
-        this.emergencyNumber = emergencyNumber;
+    public void setEmergencyNumber(String emergencyNumber) {
+        if(emergencyNumber != null && emergencyNumber.matches("^\\d{10,12}")){
+            this.emergencyNumber = emergencyNumber;
+        }
+        else{
+            throw new IllegalArgumentException("only digits");
+        }
     }
 
-    public Double getEmergencyNumber() {
+    public String getEmergencyNumber() {
         return emergencyNumber;
     }
 
     public void setFromDate(String fromDate) {
-        if (fromDate != null) {
+        if (fromDate != null && fromDate.matches("^\\d{4}-\\d{2}-\\d{2}")) {
             this.fromDate = fromDate;
+        }
+        else{
+            throw new IllegalArgumentException("Should be in this format");
         }
     }
 
@@ -118,13 +139,23 @@ public class CarReserveRegisterEntity {
         return licenseNumber;
     }
     public void setUsername(String username){
-        this.username = username;
+        if(username != null){
+            this.username = username;
+        }
+        else{
+            throw new IllegalArgumentException("Should not be empty");
+        }
     }
     public String getUsername(){
         return username;
     }
     public void setPassword(String password){
-        this.password = password;
+        if(password != null){
+            this.password = password;
+        }
+        else{
+            throw new IllegalArgumentException("should not be null");
+        }
     }
     public String getPassword(){
         return password;

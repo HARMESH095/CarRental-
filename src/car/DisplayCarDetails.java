@@ -56,7 +56,7 @@ public class DisplayCarDetails {
             statement.close();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }

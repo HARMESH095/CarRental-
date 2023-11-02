@@ -3,66 +3,66 @@ package Entity;
 public class SignUpEntity {
 
     private String name;
-    private double number;
+    private String number;
     private String gmail;
     private String password;
-    private String recheck;
-    public void setName(String name){
-        if( name != null && name.matches("^[a-zA-Z ]+$")){
+
+
+    public void setName(String name) {
+        if (name != null && name.matches("^[a-zA-Z ]+$")) {
             this.name = name.toLowerCase();
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("Symbols are not allowed.");
         }
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public void setNumber(double number){
-        if (number > 0) {
+
+    public void setNumber(String number) {
+        if (number != null && number.matches("^\\d{10,12}")) {
             this.number = number;
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("only numbers");
         }
     }
-    public double getNumber(){
+
+    public String getNumber() {
         return number;
     }
-    public void setGmail(String gmail){
-        if(gmail != null && gmail.matches("^[\\w.-]+@[\\w.-]+\\.\\w+$")){
-            this.gmail= gmail;
-        }
-        else {
+
+    public void setGmail(String gmail) {
+        if (gmail != null && gmail.matches("^[\\w.-]+@[\\w.-]+\\.\\w+$")) {
+            this.gmail = gmail;
+        } else {
             throw new IllegalArgumentException("Entered Incorrect Email");
         }
     }
-    public String getGmail(){
+
+    public String getGmail() {
         return gmail;
     }
-    public void setPassword(String password){
-        if(password != null && password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_])[A-Za-z\\d\\W_]{8,}$\n")){
+
+    public void setPassword(String password) {
+        if (password != null && password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,}$")) {
             this.password = password;
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("Does not match the requirements");
         }
     }
-    public String getPassword(){
+
+    public String getPassword() {
         return password;
     }
-    public void setRecheck(String recheck){
-        if(recheck != null){
-            this.recheck = recheck;
-        }
-        else{
-            throw new IllegalArgumentException("should not be null");
-        }
 
-    }
-    public String getRecheck(){
-        return recheck;
+    public boolean passwordValidate(String password) {
+        if (!password.matches(".*[a-z].*") || !password.matches(".*[A-Z].*") || !password.matches(".*\\d.*") || !password.matches(".*[!@#$%^&*?].*")) {
+            return false; // The password does not meet all criteria.
+        } else {
+            return true; // All criteria are met.
+        }
     }
 
-    }
+}
 

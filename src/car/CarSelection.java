@@ -114,37 +114,54 @@ public class CarSelection {
         System.out.println("Enter Details for registration");
         try {
 
-            System.out.println("Enter your Full name : ");
-            input.nextLine();
-            carReserveRegisterEntity.setName(input.nextLine());
-            System.out.println("DATE OF BIRTH : ");
-            carReserveRegisterEntity.setDateOfBirth(input.nextLine());
-            System.out.println("GENDER (M/F): ");
-            char gender = input.nextLine().charAt(0);
-            carReserveRegisterEntity.setGender(gender);
-            System.out.println("LICENSE NUMBER : ");
-            carReserveRegisterEntity.setLicenseNumber(input.nextDouble());
-            input.nextLine(); // Consume the newline character
-            System.out.println("RESIDENTIAL ADDRESS : ");
-            carReserveRegisterEntity.setResidentialAddress(input.nextLine());
-            System.out.println("PHONE NUMBER : ");
-            carReserveRegisterEntity.setNumber(input.nextDouble());
-            input.nextLine(); // Consume the newline character
-            System.out.println("EMERGENCY NUMBER : ");
-            carReserveRegisterEntity.setEmergencyNumber(input.nextDouble());
-            input.nextLine(); // Consume the newline character
-            System.out.println("FROM WHEN YOU NEED CAR DATE : ");
-            carReserveRegisterEntity.setFromDate(input.nextLine());
-            System.out.println("HOW MANY DAYS RENT: ");
-            carReserveRegisterEntity.setDays(input.nextInt());
-            input.nextLine(); // Consume the newline character
-            System.out.println("Enter the address where you will use the vehicle: ");
-            carReserveRegisterEntity.setAddress(input.nextLine());
-            System.out.println("Enter Your username to complete the registration");
-            System.out.println("USERNAME : ");
-            carReserveRegisterEntity.setUsername(input.nextLine());
-            System.out.println("PASSWORD : ");
-            carReserveRegisterEntity.setPassword(input.nextLine());
+
+            try{
+                System.out.println("Enter your Full name : ");
+                input.nextLine();
+                carReserveRegisterEntity.setName(input.nextLine());
+
+                System.out.println("DATE OF BIRTH : ");
+                carReserveRegisterEntity.setDateOfBirth(input.nextLine());
+
+                System.out.println("GENDER (M/F): ");
+                char gender = input.nextLine().charAt(0);
+                carReserveRegisterEntity.setGender(gender);
+
+                System.out.println("LICENSE NUMBER : ");
+                carReserveRegisterEntity.setLicenseNumber(input.nextDouble());
+
+                input.nextLine();
+
+                System.out.println("RESIDENTIAL ADDRESS : ");
+                carReserveRegisterEntity.setResidentialAddress(input.nextLine());
+
+                System.out.println("PHONE NUMBER : ");
+                carReserveRegisterEntity.setNumber(input.nextLine());
+
+                System.out.println("EMERGENCY NUMBER : ");
+                carReserveRegisterEntity.setEmergencyNumber(input.nextLine());
+
+                System.out.println("FROM WHEN YOU NEED CAR DATE : ");
+                carReserveRegisterEntity.setFromDate(input.nextLine());
+
+                System.out.println("HOW MANY DAYS RENT: ");
+                carReserveRegisterEntity.setDays(input.nextInt());
+
+                input.nextLine();
+
+                System.out.println("Enter the address where you will use the vehicle: ");
+                carReserveRegisterEntity.setAddress(input.nextLine());
+
+                System.out.println("Enter Your username to complete the registration");
+                System.out.println("USERNAME : ");
+                carReserveRegisterEntity.setUsername(input.nextLine());
+
+                System.out.println("PASSWORD : ");
+                carReserveRegisterEntity.setPassword(input.nextLine());
+
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
 
 
                 try{
@@ -185,7 +202,7 @@ public class CarSelection {
             MysqlConnectionCarReservationDetails mysqlConnectionCarReservationDetails = new MysqlConnectionCarReservationDetails();
             Connection connection = mysqlConnectionCarReservationDetails.getConnection();
             try {
-                String sql = "INSERT INTO car_reservations (name, date_of_birth, gender, license_number, residential_address, number, emergency_number, from_date, days, address, reservedCar,registered_username, registered_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+                String sql = "INSERT INTO car_reservations (name, date_of_birth, gender, license_number, residential_address, number, emergency_number, from_date, days, address, reg_car,reg_username, reg_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, carReserveRegisterEntity.getName());
@@ -193,8 +210,8 @@ public class CarSelection {
                 preparedStatement.setString(3, String.valueOf(carReserveRegisterEntity.getGender()));
                 preparedStatement.setDouble(4, carReserveRegisterEntity.getLicenseNumber());
                 preparedStatement.setString(5, carReserveRegisterEntity.getResidentialAddress());
-                preparedStatement.setDouble(6, carReserveRegisterEntity.getNumber());
-                preparedStatement.setDouble(7, carReserveRegisterEntity.getEmergencyNumber());
+                preparedStatement.setString(6, carReserveRegisterEntity.getNumber());
+                preparedStatement.setString(7, carReserveRegisterEntity.getEmergencyNumber());
                 preparedStatement.setString(8, carReserveRegisterEntity.getFromDate());
                 preparedStatement.setInt(9, carReserveRegisterEntity.getDays());
                 preparedStatement.setString(10, carReserveRegisterEntity.getAddress());

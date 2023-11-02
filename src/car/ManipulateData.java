@@ -23,7 +23,7 @@ public class ManipulateData {
                 System.out.println("Enter the new date (YYYY-MM-DD): ");
                 String newDate = input.nextLine();
 
-                String sql = "UPDATE car_reservations SET from_date = ? WHERE registered_username = ?";
+                String sql = "UPDATE car_reservations SET from_date = ? WHERE reg_username = ?";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql) ){
                     preparedStatement.setString(1, newDate);
@@ -54,7 +54,7 @@ public class ManipulateData {
                 System.out.println("Enter the new car ID for reservation: ");
                 int newCarId = input.nextInt();
 
-                String sql = "UPDATE car_reservations SET reservedCar = ? WHERE registered_username = ?";
+                String sql = "UPDATE car_reservations SET reg_car = ? WHERE reg_username = ?";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
                     preparedStatement.setInt(1, newCarId);
                     preparedStatement.setString(2, username);
@@ -85,7 +85,7 @@ public class ManipulateData {
                 System.out.println("Enter the new number of days: ");
                 int newDays = input.nextInt();
 
-                String sql = "UPDATE car_reservations SET days = ? WHERE registered_username = ?";
+                String sql = "UPDATE car_reservations SET days = ? WHERE reg_username = ?";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setInt(1, newDays);
@@ -114,7 +114,7 @@ public class ManipulateData {
                 ReservedCarDetails reservedCarDetails = new ReservedCarDetails();
                 reservedCarDetails.showDetails();
                 reservedCarDetails.displayCarReservations(username);
-                String sql = "DELETE FROM car_reservations WHERE registered_username = ?";
+                String sql = "DELETE FROM car_reservations WHERE reg_username = ?";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, username);

@@ -18,15 +18,15 @@ public class ReservedCarDetails {
         Connection connection = mysqlConnectionCarReservationDetails.getConnection();
 
         try{
-            String sql ="SELECT registered_username, registered_password FROM car_reservations";
+            String sql ="SELECT reg_username, reg_password FROM car_reservations";
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(sql);
 
             try{
                 while(resultSet.next()){
-                    String username = resultSet.getString("registered_username");
-                    String password = resultSet.getString("registered_password");
+                    String username = resultSet.getString("reg_username");
+                    String password = resultSet.getString("reg_password");
                     UserPasswordMap.put(username,password);
                 }
             }catch (Exception e){
@@ -72,7 +72,7 @@ public class ReservedCarDetails {
                 Connection connection = mysqlConnectionCarReservationDetails.getConnection();
 
                 try {
-                    String sql = "SELECT * FROM car_reservations WHERE registered_username = ?";
+                    String sql = "SELECT * FROM car_reservations WHERE reg_username = ?";
 
                     try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                         preparedStatement.setString(1, username);
