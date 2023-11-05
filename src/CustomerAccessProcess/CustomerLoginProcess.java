@@ -1,16 +1,16 @@
 package CustomerAccessProcess;
 
-import Entity.UserLoginEntity;
+import Entity.CustomerLoginEntity;
 
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import DatabaseConnection.MysqlConnectionUserDetails;
+import DatabaseConnection.MysqlConnectionCustomerCredentials;
 
-public class loginProcess {
+public class CustomerLoginProcess {
     private final HashMap<String, String> UserPasswordMap = new HashMap<>();
-    private final UserLoginEntity login = new UserLoginEntity();
+    private final CustomerLoginEntity login = new CustomerLoginEntity();
     private final Scanner input = new Scanner(System.in);
 
     public String logIn() {
@@ -22,7 +22,7 @@ public class loginProcess {
 
 
         try {
-            MysqlConnectionUserDetails mysqlConnectionUserDetails = new MysqlConnectionUserDetails();
+            MysqlConnectionCustomerCredentials mysqlConnectionUserDetails = new MysqlConnectionCustomerCredentials();
             Connection connection = mysqlConnectionUserDetails.getConnection();
 
             String sql = "SELECT user_name, user_password FROM userdetails";

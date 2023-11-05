@@ -1,6 +1,6 @@
 package Entity;
 
-public class SignUpEntity {
+public class CustomerSignUpEntity {
 
     private String name;
     private String number;
@@ -58,9 +58,9 @@ public class SignUpEntity {
 
     public boolean passwordValidate(String password) {
         if (!password.matches(".*[a-z].*") || !password.matches(".*[A-Z].*") || !password.matches(".*\\d.*") || !password.matches(".*[!@#$%^&*?].*")) {
-            return false; // The password does not meet all criteria.
+            return false;
         } else {
-            return true; // All criteria are met.
+            return true;
         }
     }
 

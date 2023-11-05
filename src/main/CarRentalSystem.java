@@ -5,29 +5,29 @@ import java.util.Scanner;
 import EmployeeAccess.*;
 import CustomerAccessProcess.*;
 import car.*;
-import EmployeeAccess.Backend.UploadCars;
+import EmployeeAccess.Backend.CarDetailsUploadProcess;
 
 public class CarRentalSystem {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        SignUpProcess signup = new SignUpProcess();
-        loginProcess login = new loginProcess();
+        CustomerSignUpProcess signup = new CustomerSignUpProcess();
+        CustomerLoginProcess login = new CustomerLoginProcess();
         EmployeeLoginProcess employeeLoginProcess = new EmployeeLoginProcess();
-        DisplayCarDetails displayCarDetails = new DisplayCarDetails();
-        CarSelection carSelection = new CarSelection();
-        UploadCars uploadCars = new UploadCars();
-        ReservedCarDetails reservedCarDetails = new ReservedCarDetails();
-        ManipulateData manipulateData = new ManipulateData();
+        CarDetailsDisplayProcess displayCarDetails = new CarDetailsDisplayProcess();
+        CarReservationProcess carSelection = new CarReservationProcess();
+        CarDetailsUploadProcess uploadCars = new CarDetailsUploadProcess();
+        ReservedCarDetailsDisplayProcess reservedCarDetails = new ReservedCarDetailsDisplayProcess();
+        CarReservationModificationProcess manipulateData = new CarReservationModificationProcess();
         String name = null;
         while (true) {
 
-            System.out.println(" ---------- WELCOME TO CAR RENTAL SYSTEM ----------\n\n");
-            System.out.println(" ---------- CUSTOMER OR FACULTY ----------");
+            System.out.println("\n ---------- WELCOME TO CAR RENTAL SYSTEM ----------\n");
+            System.out.println(" ---------- CUSTOMER OR FACULTY ----------\n");
             System.out.println(" Enter your choice \n 1. Customer\n 2. Faculty\n 3. Exit");
 
             int customerFacultyChoice = input.nextInt();
             if (customerFacultyChoice == 1) {
-                System.out.println(" ---------- LOGIN / SIGNUP ----------\n");
+                System.out.println("\n ---------- LOGIN / SIGNUP ----------\n");
                 System.out.println(" 1. SIGNUP (If you are new to this system) ");
                 System.out.println(" 2. LOGIN (Already a USER)");
                 System.out.println(" ENTER YOUR CHOICE (1 or 2)");
@@ -40,13 +40,12 @@ public class CarRentalSystem {
                         break;
                     case 2:
                         name = login.logIn();
-
                         break;
                     default:
                         System.out.println("Entered Wrong Value");
                 }
                 while (name != null) {
-                    System.out.println(" 1. Reserve Car\n 2. Display Car Details\n 3. Change Reservation / Details\n 4. Logout");
+                    System.out.println("\n 1. Reserve Car\n 2. Display Car Details\n 3. Change Reservation / Details\n 4. Logout");
 
                     int option = input.nextInt();
                     if (option == 1) {
@@ -114,8 +113,6 @@ public class CarRentalSystem {
                         uploadCars.entry();
                     }
                 }
-
-
             }else if(customerFacultyChoice == 3){
                 break;
             }

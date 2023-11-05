@@ -5,12 +5,10 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import DatabaseConnection.MysqlConnectionCarReservationDetails;
-import Entity.UserLoginEntity;
-public class ReservedCarDetails {
+import Entity.CarReservationEntity;
+public class ReservedCarDetailsDisplayProcess {
     private final HashMap<String, String> UserPasswordMap = new HashMap<>();
     Scanner input = new Scanner(System.in);
-    UserLoginEntity userLoginEntity = new UserLoginEntity();
-
 
     public void showDetails(){
         try {
@@ -75,18 +73,38 @@ public class ReservedCarDetails {
                     String sql = "SELECT * FROM car_reservations WHERE reg_username = ?";
 
                     try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+                        CarReservationEntity carReserveRegisterEntity = new CarReservationEntity();
                         preparedStatement.setString(1, username);
                         ResultSet resultSet = preparedStatement.executeQuery();
 
                         System.out.println("Car reservation details for user: " + username);
                         while (resultSet.next()) {
-                            // Display car reservation details (adjust column names as needed)
-                            String name = resultSet.getString("name");
-                            String dateOfBirth = resultSet.getString("date_of_birth");
-                            // Retrieve and display other columns as needed
-                            System.out.println("Name: " + name);
-                            System.out.println("Date of Birth: " + dateOfBirth);
-                            // Display other details
+
+
+                            carReserveRegisterEntity.setCarReserveRegister(
+                                    resultSet.getString("name"),
+                                    resultSet.getString("date_of_birth"),
+                                    resultSet.getString("gender").charAt(0),
+                                    resultSet.getDouble("license_number"),
+                                    resultSet.getString("residential_address"),
+                                    resultSet.getString("number"),
+                                    resultSet.getString("emergency_number"),
+                                    resultSet.getString("from_date"),
+                                    resultSet.getInt("days"),
+                                    resultSet.getString("address"),
+                                    resultSet.getString("reg_car")
+
+                            );
+
+                            System.out.println("\nLICENSE NUMBER : "+ carReserveRegisterEntity.getLicenseNumber());
+                            System.out.println("\nRESIDENTIAL ADDRESS : " + carReserveRegisterEntity.getResidentialAddress());
+                            System.out.println("\nFROM DATE : " + carReserveRegisterEntity.getFromDate());
+                            System.out.println("\nNO OF DAYS : "+ carReserveRegisterEntity.getDays());
+                            System.out.println("\nTO ADDRESS : "+ carReserveRegisterEntity.getAddress());
+                            System.out.println("\nREGISTERED CAR IDS : "+ carReserveRegisterEntity.getReg_car());
+                            System.out.println("\n");
+
                         }
                     }
                 } catch (SQLException e) {

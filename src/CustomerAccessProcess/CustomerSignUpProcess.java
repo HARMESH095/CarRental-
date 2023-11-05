@@ -1,19 +1,19 @@
 package CustomerAccessProcess;
 
-import Entity.SignUpEntity;
-import DatabaseConnection.MysqlConnectionUserDetails;
+import Entity.CustomerSignUpEntity;
+import DatabaseConnection.MysqlConnectionCustomerCredentials;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class SignUpProcess {
+public class CustomerSignUpProcess {
     private final Scanner input = new Scanner(System.in);
-    private final SignUpEntity signUp = new SignUpEntity();
+    private final CustomerSignUpEntity signUp = new CustomerSignUpEntity();
 
     public void register() {
-        MysqlConnectionUserDetails mySqlConnection = new MysqlConnectionUserDetails();
+        MysqlConnectionCustomerCredentials mySqlConnection = new MysqlConnectionCustomerCredentials();
 
         try {
             System.out.println("---------- SIGNUP ----------");
@@ -34,7 +34,7 @@ public class SignUpProcess {
                     String password = input.nextLine();
                     if (!signUp.passwordValidate(password)) {
                         System.out.println("Password does not meet the criteria.");
-                        continue; // Skip further validation, ask for the password again.
+                        continue;
                     }
 
                     System.out.print("Re-enter Password: ");
@@ -44,7 +44,7 @@ public class SignUpProcess {
                         System.out.println("Password Not Matching. You have " + (attempts - 1) + " attempts remaining.");
                         attempts--;
                     } else {
-                        // Passwords match, continue with registration
+
                         try (Connection connection = mySqlConnection.getConnection()) {
                             String sql = "INSERT INTO userdetails(user_name, user_email, user_phone, user_password) VALUES (?, ?, ?, ?)";
                             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {

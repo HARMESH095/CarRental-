@@ -1,6 +1,6 @@
 package Entity;
 
-public class UserLoginEntity {
+public class CustomerLoginEntity {
     private Double number;
     private String username;
     private String gmail;
@@ -30,4 +30,4 @@ public class UserLoginEntity {
         return password;
     }
 }
-//}
+

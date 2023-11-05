@@ -1,6 +1,6 @@
 package Entity;
 
-public class CarReserveRegisterEntity {
+public class CarReservationEntity {
     private String name;
     private String dateOfBirth;
     private Character gender;
@@ -13,9 +13,10 @@ public class CarReserveRegisterEntity {
     private String address;
     private String username;
     private String password;
+    private String reg_car;
 
-    public void setCarReserveRegister(String name, String dateOfBirth, Character gender, Double licenseNumber,
-                                      String residentialAddress, String number, String emergencyNumber, String fromDate, int days, String address) {
+    public void setCarReserveRegister(String name, String dateOfBirth, char gender, double licenseNumber,
+                                      String residentialAddress, String number, String emergencyNumber, String fromDate, int days, String address,String reg_car) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
@@ -26,6 +27,7 @@ public class CarReserveRegisterEntity {
         this.fromDate = fromDate;
         this.days = days;
         this.address = address;
+        this.reg_car = reg_car;
     }
 
     public void setName(String name) {
@@ -135,7 +137,8 @@ public class CarReserveRegisterEntity {
         this.licenseNumber = licenseNumber;
     }
 
-    public Double getLicenseNumber() {
+    public double getLicenseNumber() {
+
         return licenseNumber;
     }
     public void setUsername(String username){
@@ -147,6 +150,7 @@ public class CarReserveRegisterEntity {
         }
     }
     public String getUsername(){
+
         return username;
     }
     public void setPassword(String password){
@@ -160,4 +164,14 @@ public class CarReserveRegisterEntity {
     public String getPassword(){
         return password;
     }
+
+    public String getReg_car() {
+        return reg_car;
+    }
+
+    public void setReg_car(String reg_car) {
+        this.reg_car = reg_car;
+    }
+
+
 }

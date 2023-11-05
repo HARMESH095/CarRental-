@@ -1,6 +1,6 @@
 package Entity;
 
-public class carEntity {
+public class CarEntity {
     private int carId;
     private String model;
     private String make;
@@ -55,7 +55,7 @@ public class carEntity {
         return carId;
     }
     public void setModel(String model) {
-        if(model != null && model.matches("^[a-zA-Z]+$")){
+        if(model != null && model.matches("^[a-zA-Z ]+$")){
             this.model = model.toLowerCase();
         }
         else{
@@ -96,7 +96,7 @@ public class carEntity {
     }
 
     public void setColor(String color) {
-        if(color != null && color.matches("^[a-zA-Z]+$")){
+        if(color != null && color.matches("^[a-zA-Z ]+$")){
             this.color = color.toLowerCase();
         }
         else{

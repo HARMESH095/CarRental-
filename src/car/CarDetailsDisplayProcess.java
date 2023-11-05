@@ -6,9 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Entity.carEntity;
+import Entity.CarEntity;
 
-public class DisplayCarDetails {
+public class CarDetailsDisplayProcess {
     public void display() {
         try {
             String JdbcURL = "jdbc:mysql://localhost:3306/car";
@@ -17,13 +17,13 @@ public class DisplayCarDetails {
 
             Connection connection = DriverManager.getConnection(JdbcURL, Username, Password);
 
-            String sql = "SELECT * FROM cardetails"; // Query to select all car details
+            String sql = "SELECT * FROM cardetails";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
-            // Iterate through the results and display car details
-            carEntity carDetails = new carEntity();
+
+            CarEntity carDetails = new CarEntity();
             while (resultSet.next()) {
                 carDetails.setCarId(resultSet.getInt("carId"));
                 carDetails.setModel(resultSet.getString("model"));

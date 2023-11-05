@@ -5,94 +5,57 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import Entity.carEntity; // Import your CarEntity class
+import Entity.CarEntity;
 import DatabaseConnection.MysqlConnectionCarDetails;
 
-public class UploadCars {
+public class CarDetailsUploadProcess {
     Scanner input = new Scanner(System.in);
-    carEntity car = new carEntity();
+    CarEntity car = new CarEntity();
 
     public void entry() {
-
-
 
             try {
                 System.out.println("\nUPLOAD CARS\n");
 
-                System.out.println("Car ID: ");
+                System.out.println("Car ID: (UNIQUE ID)");
                 try{
                     car.setCarId(input.nextInt());
-                }catch (IllegalArgumentException e){
-                    System.out.println(e.getMessage());
-                }
-                input.nextLine(); // Consume the newline character
+                    input.nextLine();
 
-                System.out.println("\nModel: ");
-                try{
+                    System.out.println("\nModel: ");
                     car.setModel(input.nextLine());
-                }catch (IllegalArgumentException e){
-                    System.out.println(e.getMessage());
-                }
 
-                System.out.println("\nManufacturer: ");
-                try{
+                    System.out.println("\nManufacturer: ");
                     car.setMake(input.nextLine());
-                }catch (IllegalArgumentException e){
-                    System.out.println(e.getMessage());
-                }
 
-                System.out.println("\nYear of make: ");
-                try{
+                    System.out.println("\nYear of make: ");
                     car.setYearOfMake(input.nextInt());
-                }catch (IllegalArgumentException e){
-                    System.out.println(e.getMessage());
-                }
-                input.nextLine(); // Consume the newline character
+                    input.nextLine();
 
-                System.out.println("\nColor: ");
-                try{
+                    System.out.println("\nColor: ");
                     car.setColor(input.nextLine());
-                }catch (IllegalArgumentException e){
-                    System.out.println(e.getMessage());
-                }
 
-                System.out.println("\nPlate Number: ");
-                try{
+                    System.out.println("\nPlate Number: ('AA00AA0000' in this format)");
                     car.setPlateNumber(input.nextLine());
-                }catch (IllegalArgumentException e ){
-                    System.out.println(e.getMessage());
-                }
 
-                System.out.println("\nSeats: ");
-                try{
+                    System.out.println("\nSeats: ");
                     car.setSeats(input.nextInt());
-                }catch (IllegalArgumentException e){
-                    System.out.println(e.getMessage());
-                }
-                input.nextLine();
+                    input.nextLine();
 
-                System.out.println("\nFuel type: ");
-                try {
+                    System.out.println("\nFuel type: (Petrol, Gasoline, Electric, Diesel, Natural gas, LPG)");
                     car.setFuelType(input.nextLine());
-                }catch (IllegalArgumentException e){
-                    System.out.println(e.getMessage());
-                }
 
-                System.out.println("\nMileage: ");
-                try {
+                    System.out.println("\nMileage: ");
                     car.setMileage(input.nextInt());
-                }catch (IllegalArgumentException e){
-                    System.out.println(e.getMessage());
-                }
 
-                System.out.println("\nAvailability: ");
-                car.setAvailability(input.nextInt());
+                    System.out.println("\nAvailability: ");
+                    car.setAvailability(input.nextInt());
 
-                System.out.println("\nPrice per day: ");
-                try {
+                    System.out.println("\nPrice per day: (In Rupees)");
                     car.setPrice(input.nextInt());
                 }catch (IllegalArgumentException e){
                     System.out.println(e.getMessage());
+                    entry();
                 }
 
                 databaseImport();
@@ -112,7 +75,6 @@ public class UploadCars {
                     String sql = "INSERT INTO cardetails (carId, model, make, yearOfMake, color, plateNumber, seats, fuelType, mileage, availability, price) " +
                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
-                    // Create a PreparedStatement to execute the SQL statement
                     PreparedStatement statement = connection.prepareStatement(sql);
                     statement.setInt(1, car.getCarId());
                     statement.setString(2, car.getModel());
@@ -126,7 +88,6 @@ public class UploadCars {
                     statement.setInt(10, car.getAvailability());
                     statement.setInt(11, car.getPrice());
 
-                    // Execute the INSERT statement
                     statement.executeUpdate();
                     System.out.println("Successfully updated");
                 } catch (SQLException e) {

@@ -7,9 +7,9 @@ import java.sql.PreparedStatement;
 import java.util.Scanner;
 
 import DatabaseConnection.MysqlConnectionCarReservationDetails;
-import car.ReservedCarDetails;
 
-public class ManipulateData {
+
+public class CarReservationModificationProcess {
        Scanner input = new Scanner(System.in);
        MysqlConnectionCarReservationDetails mysqlConnectionCarReservationDetails = new MysqlConnectionCarReservationDetails();
     public void changeReservationDate(String username) throws SQLException {
@@ -17,7 +17,7 @@ public class ManipulateData {
             Connection connection = mysqlConnectionCarReservationDetails.getConnection();
 
             try{
-                ReservedCarDetails reservedCarDetails = new ReservedCarDetails();
+                ReservedCarDetailsDisplayProcess reservedCarDetails = new ReservedCarDetailsDisplayProcess();
                 reservedCarDetails.showDetails();
                 reservedCarDetails.displayCarReservations(username);
                 System.out.println("Enter the new date (YYYY-MM-DD): ");
@@ -48,7 +48,7 @@ public class ManipulateData {
             Connection connection = mysqlConnectionCarReservationDetails.getConnection();
 
             try{
-                ReservedCarDetails reservedCarDetails = new ReservedCarDetails();
+                ReservedCarDetailsDisplayProcess reservedCarDetails = new ReservedCarDetailsDisplayProcess();
                 reservedCarDetails.showDetails();
                 reservedCarDetails.displayCarReservations(username);
                 System.out.println("Enter the new car ID for reservation: ");
@@ -79,7 +79,7 @@ public class ManipulateData {
             Connection connection = mysqlConnectionCarReservationDetails.getConnection();
 
             try{
-                ReservedCarDetails reservedCarDetails = new ReservedCarDetails();
+                ReservedCarDetailsDisplayProcess reservedCarDetails = new ReservedCarDetailsDisplayProcess();
                 reservedCarDetails.showDetails();
                 reservedCarDetails.displayCarReservations(username);
                 System.out.println("Enter the new number of days: ");
@@ -111,7 +111,7 @@ public class ManipulateData {
             Connection connection = mysqlConnectionCarReservationDetails.getConnection();
 
             try{
-                ReservedCarDetails reservedCarDetails = new ReservedCarDetails();
+                ReservedCarDetailsDisplayProcess reservedCarDetails = new ReservedCarDetailsDisplayProcess();
                 reservedCarDetails.showDetails();
                 reservedCarDetails.displayCarReservations(username);
                 String sql = "DELETE FROM car_reservations WHERE reg_username = ?";

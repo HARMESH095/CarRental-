@@ -8,16 +8,16 @@ import java.util.Map;
 import java.util.Scanner;
 
 import DatabaseConnection.MysqlConnectionCarDetails;
-import DatabaseConnection.MysqlConnectionUserDetails;
+import DatabaseConnection.MysqlConnectionCustomerCredentials;
 import DatabaseConnection.MysqlConnectionCarReservationDetails;
-import Entity.CarReserveRegisterEntity;
-import Entity.carEntity;
+import Entity.CarReservationEntity;
+import Entity.CarEntity;
 
 
-public class CarSelection {
+public class CarReservationProcess {
     ArrayList<Integer> SelectedCars = new ArrayList<>();
-    Map<Integer, List<carEntity>> carMap = new HashMap<>(); // Use carEntity in the map
-    CarReserveRegisterEntity carReserveRegisterEntity = new CarReserveRegisterEntity();
+    Map<Integer, List<CarEntity>> carMap = new HashMap<>();
+    CarReservationEntity carReserveRegisterEntity = new CarReservationEntity();
     Scanner input = new Scanner(System.in);
     private final HashMap<String, String> UserPasswordMap = new HashMap<>();
 
@@ -37,7 +37,7 @@ public class CarSelection {
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 while (resultSet.next()) {
-                    carEntity car = new carEntity();
+                    CarEntity car = new CarEntity();
                     car.setCarDetails(
                             resultSet.getInt("CarId"),
                             resultSet.getString("model"),
@@ -56,7 +56,7 @@ public class CarSelection {
                     if (carMap.containsKey(carId)) {
                         carMap.get(carId).add(car);
                     } else {
-                        List<carEntity> carList = new ArrayList<>();
+                        List<CarEntity> carList = new ArrayList<>();
                         carList.add(car);
                         carMap.put(carId, carList);
                     }
@@ -67,18 +67,10 @@ public class CarSelection {
                 connection.close();
             }catch (Exception e) {
                 System.out.println("Problem entering details into map error: "+ e);
-
             }
-
-
         }catch (Exception e) {
             System.out.println("Problem connecting with database error : "+ e);
         }
-
-
-
-
-
     }
 
     public void SelectCar(){
@@ -99,7 +91,7 @@ public class CarSelection {
             String response = input.next();
 
             if ("no".equalsIgnoreCase(response)) {
-                break; // Exit the loop if the user doesn't want to add more cars.
+                break;
             }
         }
 
@@ -165,7 +157,7 @@ public class CarSelection {
 
 
                 try{
-                    MysqlConnectionUserDetails mysqlConnectionUserDetails = new MysqlConnectionUserDetails();
+                    MysqlConnectionCustomerCredentials mysqlConnectionUserDetails = new MysqlConnectionCustomerCredentials();
                     String sql = "SELECT user_name, user_password FROM userdetails";
                     Connection connection = mysqlConnectionUserDetails.getConnection();
                     try (Statement statement = connection.createStatement();
@@ -241,11 +233,11 @@ public class CarSelection {
         try {
             MysqlConnectionCarDetails mysqlConnectionCarDetails = new MysqlConnectionCarDetails();
             Connection connection = mysqlConnectionCarDetails.getConnection();
-            // Check if the selected cars are available
+
             boolean allCarsAvailable = true;
             int totalAmount = 0;
             for (Integer carId : SelectedCars) {
-                // Check if the car is available in the database
+
                 String checkAvailabilitySql = "SELECT availability, price FROM cardetails WHERE CarId = ?";
                 PreparedStatement availabilityStatement = connection.prepareStatement(checkAvailabilitySql);
                 availabilityStatement.setInt(1, carId);
@@ -257,9 +249,9 @@ public class CarSelection {
 
                     if (availability > 0) {
                         totalAmount += price;
-                        // Subtract availability of the selected car
+
                         availability--;
-                        // Update the availability in the database
+
                         String updateAvailabilitySql = "UPDATE cardetails SET availability = ? WHERE CarId = ?";
                         PreparedStatement updateAvailabilityStatement = connection.prepareStatement(updateAvailabilitySql);
                         updateAvailabilityStatement.setInt(1, availability);
