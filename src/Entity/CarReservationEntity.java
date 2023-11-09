@@ -173,5 +173,4 @@ public class CarReservationEntity {
         this.reg_car = reg_car;
     }
 
-
 }

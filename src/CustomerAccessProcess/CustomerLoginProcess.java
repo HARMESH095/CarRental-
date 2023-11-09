@@ -1,63 +1,43 @@
 package CustomerAccessProcess;
 
 import Entity.CustomerLoginEntity;
+import main.Options;
+import main.UsernamePasswordMatch;
 
-import java.sql.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import DatabaseConnection.MysqlConnectionCustomerCredentials;
 
 public class CustomerLoginProcess {
     private final HashMap<String, String> UserPasswordMap = new HashMap<>();
     private final CustomerLoginEntity login = new CustomerLoginEntity();
     private final Scanner input = new Scanner(System.in);
 
-    public String logIn() {
+    public void logIn() {
+
+        UsernamePasswordMatch usernamePasswordMatch = new UsernamePasswordMatch();
+        Options options = new Options();
+        System.out.println("ENTER");
         System.out.println("Username : ");
         login.setUsername(input.nextLine());
         System.out.println("Passcode : ");
         login.setPassword(input.nextLine());
-        String usernamefinal = null;
+
+        if(usernamePasswordMatch.check(login.getUsername(), login.getPassword())){
+            System.out.println("\n Logged in \n");
+            options.Option(login.getUsername());
 
 
-        try {
-            MysqlConnectionCustomerCredentials mysqlConnectionUserDetails = new MysqlConnectionCustomerCredentials();
-            Connection connection = mysqlConnectionUserDetails.getConnection();
+        }else{
+            System.out.println(" ");
 
-            String sql = "SELECT user_name, user_password FROM userdetails";
-            try (Statement statement = connection.createStatement();
-                 ResultSet resultSet = statement.executeQuery(sql)) {
-                while (resultSet.next()) {
-                    String username = resultSet.getString("user_name");
-                    String password = resultSet.getString("user_password");
-                    UserPasswordMap.put(username, password);
-                }
-            } catch (SQLException e) {
-                System.out.println("Error while querying the database: " + e);
-            }
 
-        } catch (Exception e) {
-            System.out.println("An error occurred: " + e);
         }
 
-        if (UserPasswordMap.containsKey(login.getUsername())) {
-            if (login.getPassword().equals(UserPasswordMap.get(login.getUsername()))) {
-                System.out.println("Successfully logged in");
-                usernamefinal = login.getUsername();
-            } else {
-                System.out.println("Password mismatch");
-                logIn();
-            }
-        } else {
-            System.out.println("Username not found");
-            logIn();
-        }
-        return usernamefinal;
+
+
+
+
     }
-
-
-
-
 
 }

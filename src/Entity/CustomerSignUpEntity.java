@@ -12,7 +12,7 @@ public class CustomerSignUpEntity {
         if (name != null && name.matches("^[a-zA-Z ]+$")) {
             this.name = name.toLowerCase();
         } else {
-            throw new IllegalArgumentException("Symbols are not allowed.");
+            throw new IllegalArgumentException("You have Entered Wrong Value");
         }
     }
 
@@ -24,7 +24,7 @@ public class CustomerSignUpEntity {
         if (number != null && number.matches("^\\d{10,12}")) {
             this.number = number;
         } else {
-            throw new IllegalArgumentException("only numbers");
+            throw new IllegalArgumentException("Incomplete Number/ Used Symbols or character ");
         }
     }
 
@@ -36,7 +36,7 @@ public class CustomerSignUpEntity {
         if (gmail != null && gmail.matches("^[\\w.-]+@[\\w.-]+\\.\\w+$")) {
             this.gmail = gmail;
         } else {
-            throw new IllegalArgumentException("Entered Incorrect Email");
+            throw new IllegalArgumentException("Incorrect Email");
         }
     }
 
